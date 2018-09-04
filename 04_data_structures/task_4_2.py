@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 '''
 Задание 4.2
@@ -9,3 +10,5 @@
 '''
 
 MAC = 'AAAA:BBBB:CCCC'
+MAC=MAC.replace(':', '.')
+print(MAC)
