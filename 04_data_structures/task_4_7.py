@@ -10,3 +10,8 @@
 '''
 
 MAC = 'AAAA:BBBB:CCCC'
+OCTETS=MAC.split(':')
+OCTETS[0]=int(OCTETS[0],16)
+OCTETS[1]=int(OCTETS[1],16)
+OCTETS[2]=int(OCTETS[2],16)
+print('{:b} {:b} {:b}'.format(OCTETS[0], OCTETS[1], OCTETS[2]))
