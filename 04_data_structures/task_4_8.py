@@ -20,3 +20,14 @@
 '''
 
 IP = '192.168.3.1'
+PARTS=IP.split('.')
+PARTS[0]=int(PARTS[0])
+PARTS[1]=int(PARTS[1])
+PARTS[2]=int(PARTS[2])
+PARTS[3]=int(PARTS[3])
+IP_TEMPLATE='''
+{O1:<8}  {O2:<8}  {O3:<8}  {O4:<8}
+{O1:08b}  {O2:08b}  {O3:08b}  {O4:08b}
+'''
+print(IP_TEMPLATE.format(O1=PARTS[0], O2=PARTS[1], O3=PARTS[2],
+O4=PARTS[3]))
