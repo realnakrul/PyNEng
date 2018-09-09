@@ -22,7 +22,7 @@ Enter device name: r1
 Все задания надо выполнять используя только пройденные темы.
 То есть эту задачу можно решить без использования условия if.
 '''
-
+import readline
 london_co = {
     'r1': {
         'location': '21 New Globe Walk',
@@ -48,3 +48,5 @@ london_co = {
         'routing': True
     }
 }
+
+print(london_co[input('Enter device name: ')])
