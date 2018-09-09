@@ -19,7 +19,7 @@ Enter parameter name: ios
 Все задания надо выполнять используя только пройденные темы.
 То есть эту задачу можно решить без использования условия if.
 '''
-
+import readline
 london_co = {
     'r1': {
         'location': '21 New Globe Walk',
@@ -45,3 +45,6 @@ london_co = {
         'routing': True
     }
 }
+DEVICE=input('Enter device name: ')
+PARAM=input('Enter parameter name: ')
+print(london_co[DEVICE][PARAM])
