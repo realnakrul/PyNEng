@@ -48,7 +48,7 @@ switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan 2,3,4,5
 '''
-
+import readline
 access_template = [
     'switchport mode access', 'switchport access vlan {}',
     'switchport nonegotiate', 'spanning-tree portfast',
@@ -59,3 +59,9 @@ trunk_template = [
     'switchport trunk encapsulation dot1q', 'switchport mode trunk',
     'switchport trunk allowed vlan {}'
 ]
+INT_DICT={'access': access_template, 'trunk': trunk_template}
+INT_MODE=input('Enter interface mode (access/trunk): ')
+INT_NUM=input('Enter interface type and number: ')
+VL=input('Enter vlan(s): ')
+print('\ninterface '+INT_NUM)
+print('\n'.join(INT_DICT[INT_MODE]).format(VL))
