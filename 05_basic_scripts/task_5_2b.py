@@ -46,5 +46,5 @@ london_co = {
     }
 }
 DEVICE=input('Enter device name: ')
-PARAM=input('Enter parameter name ('+', '.join(list(london_co['r1'].keys()))+'): ')
+PARAM=input('Enter parameter name ('+', '.join(list(london_co[DEVICE].keys()))+'): ')
 print(london_co[DEVICE][PARAM])

@@ -23,7 +23,7 @@ Enter parameter name (ios, model, vendor, location, ip): io
 Все задания надо выполнять используя только пройденные темы.
 То есть эту задачу можно решить без использования условия if.
 '''
-
+import readline
 london_co = {
     'r1': {
         'location': '21 New Globe Walk',
@@ -49,3 +49,6 @@ london_co = {
         'routing': True
     }
 }
+DEVICE=input('Enter device name: ')
+PARAM=input('Enter parameter name ('+', '.join(list(london_co[DEVICE].keys()))+'): ')
+print(london_co[DEVICE].get(PARAM, 'Такого параметра нет'))
