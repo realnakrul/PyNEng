@@ -13,8 +13,10 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
-
+import readline
 num_list = [10, 2, 30, 100, 10, 50, 11, 30, 15, 7]
 word_list = [
     'python', 'ruby', 'perl', 'ruby', 'perl', 'python', 'ruby', 'perl'
 ]
+print(len(num_list)-num_list[::-1].index(int(input('num_list?: ')))-1)
+print(len(word_list)-word_list[::-1].index(input('word_list?: '))-1)
