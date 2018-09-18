@@ -16,5 +16,20 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
-
+cfg_lines=[]
 ignore = ['duplex', 'alias', 'Current configuration']
+from sys import argv
+fname_in = argv[1]
+fname_out = argv[2]
+with open(fname_in, 'r') as f:
+    for line in f:
+        ignore_condition=''
+        for i in ignore:
+            if i in line:
+                ignore_condition=i
+        if not ignore_condition:
+            cfg_lines.append(line.rstrip()+'\n')
+print(cfg_lines)
+f = open(fname_out, 'w')
+f.writelines(cfg_lines)
+f.close()
