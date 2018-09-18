@@ -13,5 +13,19 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
-
+cfg_lines=[]
 ignore = ['duplex', 'alias', 'Current configuration']
+from sys import argv
+fname = argv[1]
+with open(argv[1], 'r') as f:
+    for line in f:
+        ignore_condition=''
+        for i in ignore:
+            if i in line:
+                ignore_condition=i
+        if not ignore_condition:
+            cfg_lines.append(line.rstrip()+'\n')
+print(cfg_lines)
+f = open('config_sw1_cleared.txt', 'w')
+f.writelines(cfg_lines)
+f.close()
