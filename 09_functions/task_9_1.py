@@ -39,8 +39,6 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
-
-
 def generate_access_config(access):
     '''
     access - словарь access-портов,
@@ -56,7 +54,14 @@ def generate_access_config(access):
         'switchport nonegotiate', 'spanning-tree portfast',
         'spanning-tree bpduguard enable'
     ]
-
+    result=[]
+    for int in access.keys():
+        result.append(int)
+        for command in access_template:
+            if command.endswith('vlan'):
+                command=command + ' ' + str(access[int])
+            result.append(command)
+    return result
 
 access_dict = {
     'FastEthernet0/12': 10,
@@ -64,3 +69,4 @@ access_dict = {
     'FastEthernet0/16': 17,
     'FastEthernet0/17': 150
 }
+print(generate_access_config(access_dict))
