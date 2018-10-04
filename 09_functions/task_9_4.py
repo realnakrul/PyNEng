@@ -22,7 +22,7 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
 
-ignore = ['duplex', 'alias', 'Current configuration']
+ignore = ['duplex', 'alias', 'Current configuration', '!']
 
 
 def ignore_command(command, ignore):
@@ -37,3 +37,18 @@ def ignore_command(command, ignore):
     * False - если нет
     '''
     return any(word in command for word in ignore)
+
+def parse(conf):
+    result={}
+    command_high=''
+    with open(conf) as f:
+        for line in f:
+            line=line.rstrip()
+            if line and not ignore_command(line, ignore):
+                if line[0] != ' ':
+                    result.update({line:[]})
+                    command_high=line
+                else:
+                    result[command_high].append(line)
+        return result
+print(parse('config_sw1.txt'))
