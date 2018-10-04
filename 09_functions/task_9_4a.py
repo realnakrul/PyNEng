@@ -36,8 +36,7 @@
 
 '''
 
-ignore = ['duplex', 'alias', 'Current configuration']
-
+ignore = ['duplex', 'alias', 'Current configuration', '!']
 
 def check_ignore(command, ignore):
     '''
@@ -50,3 +49,59 @@ def check_ignore(command, ignore):
 
     '''
     return any(word in command for word in ignore)
+
+def config_to_dict(conf):
+    result={}
+    block=[]
+    command_high=''
+    command_2=''
+    new_block=False
+    tripple=False
+    with open(conf) as f:
+        for line in f:
+            line=line.rstrip()
+            '''Cutting config to blocks. New block starts with string without sapce and
+            check tripple depth for the block'''
+            if line and not check_ignore(line, ignore):
+                if line[0]!=' ':
+                    old_block=block
+                    block=[]
+                    new_block=True
+                else:
+                    new_block=False
+                    if line.startswith('  '):
+                        tripple=True                   
+                block.append(line)
+                '''Parse block Depends on depth '''
+                if new_block:
+                    if tripple:
+                    	for str in old_block:
+                            if str[0]!=' ':
+                                result.update({str:{}})
+                                command_high=str
+                            else:
+                                str=str[1:]
+                                if str[0]!=' ':
+                                    result[command_high].update({str:[]})
+                                    command_2=str
+                                else:
+                                    result[command_high][command_2].append(str.strip())
+                    else:
+                        for str in old_block:
+                            if str[0]!=' ':
+                                result.update({str:[]})
+                                command_high=str
+                            else:
+                                result[command_high].append(str.strip())
+                    tripple=False
+        return result
+parse=config_to_dict('config_r1.txt')
+for key in parse.keys():
+    print('\n'+key)
+    if type(parse[key])==type(dict()):
+        for sub_key in parse[key].keys():
+            print('    '+sub_key)
+            print('        '+str(parse[key][sub_key]))
+    else:
+        print('    '+str(parse[key]))
+    
