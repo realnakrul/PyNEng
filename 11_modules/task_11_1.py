@@ -28,3 +28,17 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 '''
+def parse_cdp_neighbors(cdp_output):
+    result={}
+    for line in cdp_output.split('\n'):
+        if 'show cdp neighbors' in line:
+            dev_a=line.split('>')[0]
+        if 'Eth' in line:
+            dev_b=line.split()[0]
+            int_a=line.split()[1]+line.split()[2]
+            int_b=line.split()[-2]+line.split()[-1]
+            result.update({tuple([dev_a,int_a]):tuple([dev_b,int_b])})
+    return result
+
+with open('sw1_sh_cdp_neighbors.txt', 'r') as f:
+    print(parse_cdp_neighbors(f.read()))
