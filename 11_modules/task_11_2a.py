@@ -33,3 +33,21 @@
 > pip install graphviz
 
 '''
+from task_11_1 import parse_cdp_neighbors
+from draw_network_graph import draw_topology
+device_list=['sh_cdp_n_sw1.txt', 'sh_cdp_n_r1.txt', 'sh_cdp_n_r2.txt', 'sh_cdp_n_r3.txt']
+neighbors={}
+for device in device_list:
+    with open(device, 'r') as f:
+        new_neighbors = parse_cdp_neighbors(f.read())
+        if len(neighbors):
+            for new_keys in new_neighbors.keys():
+                flag=False
+                for exist_values in neighbors.values():
+                    if exist_values == new_keys:
+                        flag=True
+                if not flag:
+                    neighbors.update({new_keys:new_neighbors[new_keys]})
+        else:
+            neighbors.update(new_neighbors)
+draw_topology(neighbors,'img/task_11_2a')
