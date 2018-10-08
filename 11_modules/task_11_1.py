@@ -40,5 +40,6 @@ def parse_cdp_neighbors(cdp_output):
             result.update({tuple([dev_a,int_a]):tuple([dev_b,int_b])})
     return result
 
-with open('sw1_sh_cdp_neighbors.txt', 'r') as f:
-    print(parse_cdp_neighbors(f.read()))
+if __name__ == "__main__":
+    with open('sw1_sh_cdp_neighbors.txt', 'r') as f:
+        print(parse_cdp_neighbors(f.read()))
