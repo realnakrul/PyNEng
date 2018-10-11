@@ -22,3 +22,24 @@ Reachable    Unreachable
 То есть, до выполнения функции и после списки должны выглядеть одинаково.
 
 '''
+from tabulate import tabulate
+list1=['10.1.1.1', '10.1.1.2']
+list2=['10.1.1.7', '10.1.1.8', '10.1.1.8']
+def ip_table(reach, unreach):
+    col=['Reachable','Unreachable']
+    list3=[]
+    m1=max(len(reach),len(unreach))
+    for i in range(m1):
+        a=''
+        b=''
+        try:
+            a=reach[i]
+        except IndexError:
+            pass
+        try:
+            b=unreach[i]
+        except IndexError:
+            pass
+        list3.append([a,b])
+    print(tabulate(list3, headers=col))
+ip_table(list1,list2)
