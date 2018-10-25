@@ -38,6 +38,7 @@ Loopback0                  10.1.1.1        YES manual up                    up
 Loopback100                100.0.0.1       YES manual up                    up
 
 '''
+
 import readline
 import re
 
@@ -47,12 +48,13 @@ if not f1:
     f1='sh_ip_int_br.txt'
 if not r1:
     r1='Fas'
-print(f1, r1)
 
 def regf(f2,r2):
     with open(f2, 'r') as f:
+        r2='.*('+r2+').*'
+        print(r2)
         for line in f:
-            match = re.search('.*'+r2+'.*',line)
+            match = re.search(r2,line)
             if match:
                 print(match.group(0))
 regf(f1,r1)

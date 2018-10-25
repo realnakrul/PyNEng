@@ -23,7 +23,6 @@
 диапазоны адресов и так далее, так как обрабатывается вывод команды, а не ввод пользователя.
 
 '''
-regex = '\d*\.\d*\.\d*\.\d*'
 import readline
 import re
 
@@ -40,6 +39,5 @@ def parse_cfg(f2):
                               '(\d*\.\d*\.\d*\.\d*)',line)
             if match:
                 result.append(match.group(1,2))
-                #print(match.group(1,2))
     return result
 print(parse_cfg(f1))
