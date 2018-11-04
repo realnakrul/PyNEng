@@ -42,4 +42,5 @@ def parse_sh_ip_int_br(f2):
             if match:
                 result.append(match.groups())
     return result
-pprint(parse_sh_ip_int_br(f1))
+if __name__ == '__main__':
+    pprint(parse_sh_ip_int_br(f1))
