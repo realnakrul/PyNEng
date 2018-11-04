@@ -22,3 +22,24 @@
 Проверить работу функции на примере файла sh_ip_int_br_2.txt.
 
 '''
+import readline
+import re
+from pprint import pprint
+f1=input('File:')
+if not f1:
+    f1='sh_ip_int_br_2.txt'
+print(f1)
+
+def parse_sh_ip_int_br(f2):
+    result=[]
+    with open(f2, 'r') as f:
+        for line in f:
+            match = re.search('(\S+) +'
+                              '(\S+) +'
+                              '\w+ +\w+ +'
+                              '(up|down|administratively down) +'
+                              '(up|down)',line)
+            if match:
+                result.append(match.groups())
+    return result
+pprint(parse_sh_ip_int_br(f1))
