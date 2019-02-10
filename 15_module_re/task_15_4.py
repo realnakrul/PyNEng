@@ -25,10 +25,6 @@
 import readline
 import re
 from pprint import pprint
-f1=input('File:')
-if not f1:
-    f1='sh_ip_int_br_2.txt'
-print(f1)
 
 def parse_sh_ip_int_br(f2):
     result=[]
@@ -42,5 +38,10 @@ def parse_sh_ip_int_br(f2):
             if match:
                 result.append(match.groups())
     return result
+
 if __name__ == '__main__':
+    f1 = input('File:')
+    if not f1:
+        f1 = 'sh_ip_int_br_2.txt'
+    print(f1)
     pprint(parse_sh_ip_int_br(f1))
