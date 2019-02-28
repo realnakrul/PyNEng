@@ -25,3 +25,29 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 '''
+
+
+def parse_sh_cdp_neighbors(cdp_string):
+    """Parses sh cdp neighbors """
+    import re
+    cdp_list = cdp_string.split('\n')
+    neighbor_dict = []
+    for line in cdp_list:
+        parent_dev_re = re.search('^(\S+)>', line)
+        neighbor_dev_re = re.search('^(\S+) +(\S+ \S+).+ (\S+ \S+\d)$', line)  # Three groups, last ends with digit
+        if parent_dev_re:
+            parent_dev_id = parent_dev_re.group(1)
+            neighbor_dict = {parent_dev_id: {}}
+        if neighbor_dev_re:
+            neighbor_dev_id = neighbor_dev_re.group(1)
+            parent_dev_int = neighbor_dev_re.group(2)
+            neighbor_dev_int = neighbor_dev_re.group(3)
+            neighbor_dict[parent_dev_id][parent_dev_int] = {neighbor_dev_id: neighbor_dev_int}
+    return neighbor_dict
+
+
+if __name__ == '__main__':
+    from pprint import pprint
+    with open('sh_cdp_n_sw1.txt', 'r') as f:
+        show_out = f.read().rstrip()
+    pprint(parse_sh_cdp_neighbors(show_out))
